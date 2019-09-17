@@ -122,7 +122,7 @@ gulp.task( 'browser-sync', function() {
 gulp.task( 'scripts', function() {
     var scripts = [
 
-        `${paths.node}/vue/dist/vue.min.js`,
+        `${paths.node}/vue/dist/vue.js`,
         // Start - All BS4 stuff
         `${paths.dev}/js/bootstrap4/bootstrap.bundle.js`,
 
