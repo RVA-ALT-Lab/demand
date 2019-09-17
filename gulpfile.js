@@ -121,7 +121,7 @@ gulp.task( 'browser-sync', function() {
 // Uglifies and concat all JS files into one
 gulp.task( 'scripts', function() {
     var scripts = [
-
+        `${paths.dev}/js/vue.js`,
         // Start - All BS4 stuff
         `${paths.dev}/js/bootstrap4/bootstrap.bundle.js`,
 
