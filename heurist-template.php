@@ -51,7 +51,7 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
                   <p>{{record.rec_RecType.name}}</p>
                   <table class="table">
                     <thead>Details</thead>
-                    <tr v-for="thing in record.details" v-if="thing.">
+                    <tr v-for="thing in record.details">
                       <td>{{thing.fieldName}}</td>
                       <td>{{thing.value}}</td>
                     </tr>
