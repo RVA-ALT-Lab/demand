@@ -5,7 +5,7 @@ var sass = require( 'gulp-sass' );
 var cssnano = require( 'gulp-cssnano' );
 var rename = require( 'gulp-rename' );
 var concat = require( 'gulp-concat' );
-var uglify = require( 'gulp-uglify' );
+var uglify = require( 'gulp-uglify-es' ).default;
 var imagemin = require( 'gulp-imagemin' );
 var ignore = require( 'gulp-ignore' );
 var rimraf = require( 'gulp-rimraf' );
@@ -122,6 +122,7 @@ gulp.task( 'browser-sync', function() {
 gulp.task( 'scripts', function() {
     var scripts = [
 
+        `${paths.node}/vue/dist/vue.min.js`,
         // Start - All BS4 stuff
         `${paths.dev}/js/bootstrap4/bootstrap.bundle.js`,
 
