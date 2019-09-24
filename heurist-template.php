@@ -32,11 +32,10 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
 <div class="wrapper" id="wrapper-index">
 	<div class="<?php echo esc_html( $container ); ?>" id="content" tabindex="-1">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
         <div class="container" id="heurist">
         	<div class="row">
 	        	<div class="col-md-3">
-              <h2>Search</h2>
               <ul class="list-group">
                 <li  class="list-group-item" v-for="type in database.rectypes">
                   <input type="checkbox" v-model="typeFacets" :value="type.name">
@@ -62,8 +61,6 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
 		     </div>
 	    </div>
             </div>
-            <!-- Sidebar brings in col-md-4 automatically, does not need container -->
-            <?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
         </div><!-- .row -->
     </div><!-- Container end -->
 </div><!-- Wrapper end -->
