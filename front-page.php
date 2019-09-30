@@ -13,9 +13,9 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
 	<div class="<?php echo esc_html( $container ); ?>" id="content" tabindex="-1">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
-          <h3><?php echo bloginfo('description');?></h3>
           <div class="card">
             <div class="card-body">
+              <h5 class="card-title"><?php echo bloginfo('description');?></h5>
               <div class="row">
                 <div class="col-lg-6">
                   <?php

@@ -1,1 +1,24 @@
 // This is an empty scss file for your custom styles - Please add your super duper awesome mega design styles here
+.list-group-item.active,
+.list-group-item {
+  background-color: #fff;
+  border-color: #fff;
+
+}
+
+.list-group-item:hover {
+  border-left: 3px solid #262537;
+}
+
+.list-group-item:hover a {
+  text-decoration: underline;
+}
+
+.site {
+  background-color: #DCDCDC;
+}
+
+.content-area {
+  background-color: #fff;
+  padding: 2em;
+}
