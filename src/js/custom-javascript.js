@@ -9,7 +9,8 @@ var blog = new Vue({
     return {
       records: [],
       database: {},
-      typeFacets: []
+      typeFacets: [],
+      details: {}
     }
   },
   computed: {

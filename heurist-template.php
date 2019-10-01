@@ -34,7 +34,13 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
         <div class="row">
             <div class="col-lg-12">
         <div class="container" id="heurist">
-        	<div class="row">
+
+          <div class="row">
+            <select name="recordTypes" id="recordTypes" v-model="selectedRecordType">
+              <option v-for="type in database.rectypes" :value="type.name">{{type.name}}</option>
+            </select>
+          </div>
+          <div class="row">
 	        	<div class="col-md-3">
               <ul class="list-group">
                 <li  class="list-group-item" v-for="type in database.rectypes">

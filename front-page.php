@@ -14,10 +14,10 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="menu-card">
               <h5 class="card-title"><?php echo bloginfo('description');?></h5>
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 menu-column">
                   <?php
                     wp_nav_menu(
                       array(
