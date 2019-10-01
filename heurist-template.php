@@ -35,10 +35,35 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
             <div class="col-lg-12">
         <div class="container" id="heurist">
 
-          <div class="row">
+          <div class="row" id="search-interface">
+            <div class="col-lg-12">
+            <p>Select a record type:</p>
             <select name="recordTypes" id="recordTypes" v-model="selectedRecordType">
               <option v-for="type in database.rectypes" :value="type.name">{{type.name}}</option>
             </select>
+            <div v-if="selectedRecordType">
+            <p>Select a detail:</p>
+              <select name="recordDetailTypes" id="recordDetailTypes" v-model="selectedDetail" >
+                <option v-for="detail in selectedRecordDetails" :value="detail.fieldName">{{detail.fieldName}}</option>
+              </select>
+
+              <div>
+              <p>Select a value:</p>
+              <select name="selectedDetailValues" id="selectedDetailValues" >
+                <option v-for="value in selectedDetailValues" :value="value">{{value}}</option>
+              </select>
+              <p>Or, enter a free text search</p>
+              <input type="text" name="" id="">
+              <button class="btn btn-primary">Show Results</button>
+              </div>
+            </div>
+          </div>
+
+          </div>
+          <div class="row" id="records-display">
+            <div class="col-lg-12">
+
+            </div>
           </div>
           <div class="row">
 	        	<div class="col-md-3">

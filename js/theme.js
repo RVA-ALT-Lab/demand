@@ -7040,6 +7040,8 @@ var blog = new Vue({
       records: [],
       database: {},
       typeFacets: [],
+      selectedRecordType: '',
+      selectedDetail: '',
       details: {}
     };
   },
@@ -7060,6 +7062,40 @@ var blog = new Vue({
         });
         return filteredSets;
       }
+    },
+
+    selectedRecords() {
+      console.log('being evaluated');
+      return this.mappedRecords.filter(record => {
+        return record.rec_RecTypeName === this.selectedRecordType;
+      });
+    },
+
+    selectedRecordDetails() {
+      const details = {};
+
+      for (const record of this.selectedRecords) {
+        for (const detail of record.details) {
+          if (!details[detail.fieldName]) {
+            details[detail.fieldName] = {
+              fieldName: detail.fieldName,
+              fieldType: detail.fieldType
+            };
+          }
+        }
+      }
+
+      return Object.values(details);
+    },
+
+    selectedDetailValues() {
+      return this.selectedRecords.map(record => {
+        const details = record.details.filter(detail => detail.fieldName === this.selectedDetail);
+
+        if (details[0]) {
+          return details[0].value;
+        }
+      });
     }
 
   },
