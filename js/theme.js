@@ -7039,10 +7039,11 @@ var blog = new Vue({
     return {
       records: [],
       database: {},
-      typeFacets: [],
       selectedRecordType: '',
       selectedDetail: '',
-      details: {}
+      searchTerm: '',
+      foundRecords: [],
+      isSearching: false
     };
   },
   computed: {
@@ -7053,19 +7054,7 @@ var blog = new Vue({
       });
     },
 
-    filteredRecords() {
-      if (this.typeFacets.length === 0) {
-        return this.mappedRecords;
-      } else {
-        var filteredSets = this.mappedRecords.filter(record => {
-          return this.typeFacets.includes(record.rec_RecType.name);
-        });
-        return filteredSets;
-      }
-    },
-
     selectedRecords() {
-      console.log('being evaluated');
       return this.mappedRecords.filter(record => {
         return record.rec_RecTypeName === this.selectedRecordType;
       });
@@ -7086,16 +7075,6 @@ var blog = new Vue({
       }
 
       return Object.values(details);
-    },
-
-    selectedDetailValues() {
-      return this.selectedRecords.map(record => {
-        const details = record.details.filter(detail => detail.fieldName === this.selectedDetail);
-
-        if (details[0]) {
-          return details[0].value;
-        }
-      });
     }
 
   },
@@ -7105,6 +7084,31 @@ var blog = new Vue({
   },
 
   methods: {
+    searchBasedOnTerm() {
+      this.isSearching = true;
+      const foundRecords = this.selectedRecords.filter(record => {
+        const foundDetails = record.details.filter(detail => {
+          console.log(detail);
+
+          if (detail.fieldType === 'resource') {
+            if (detail.value.title.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+              return true;
+            }
+          } else {
+            if (detail.value.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+              return true;
+            }
+          }
+        });
+
+        if (foundDetails.length > 0) {
+          return true;
+        }
+      });
+      this.isSearching = false;
+      this.foundRecords = foundRecords;
+    },
+
     fetchData() {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', blogURL);

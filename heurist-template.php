@@ -36,25 +36,40 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
         <div class="container" id="heurist">
 
           <div class="row" id="search-interface">
-            <div class="col-lg-12">
-            <p>Select a record type:</p>
+           <div class="col-lg-4">
+            <p>First, select a record type:</p>
             <select name="recordTypes" id="recordTypes" v-model="selectedRecordType">
               <option v-for="type in database.rectypes" :value="type.name">{{type.name}}</option>
             </select>
-            <div v-if="selectedRecordType">
-            <p>Select a detail:</p>
-              <select name="recordDetailTypes" id="recordDetailTypes" v-model="selectedDetail" >
-                <option v-for="detail in selectedRecordDetails" :value="detail.fieldName">{{detail.fieldName}}</option>
-              </select>
-
-              <div>
-              <p>Select a value:</p>
-              <select name="selectedDetailValues" id="selectedDetailValues" >
-                <option v-for="value in selectedDetailValues" :value="value">{{value}}</option>
-              </select>
-              <p>Or, enter a free text search</p>
-              <input type="text" name="" id="">
-              <button class="btn btn-primary">Show Results</button>
+            <br>
+              <div v-if="selectedRecordType">
+              <p>Next, select the detail about the record:</p>
+                <select name="recordDetailTypes" id="recordDetailTypes" v-model="selectedDetail" >
+                  <option v-for="detail in selectedRecordDetails" :value="detail.fieldName">{{detail.fieldName}}</option>
+                </select>
+              </div>
+            <br>
+              <div v-if="selectedDetail">
+                <p>Finally, enter a search value:</p>
+                <input type="text" name="" id="" v-model="searchTerm">
+                <button class="btn btn-primary" @click="searchBasedOnTerm">Show Results</button>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <p v-if="foundRecords.length === 0 && !isSearching">No records to display yet...</p>
+              <p v-if="isSearching">Searching across all records of type {{selectedRecordType}}</p>
+              <div v-for="record in foundRecords" class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{record.rec_Title}}</h5>
+                    <p>{{record.rec_RecType.name}}</p>
+                    <table class="table">
+                      <thead>Details</thead>
+                      <tr v-for="thing in record.details">
+                        <td>{{thing.fieldName}}</td>
+                        <td>{{thing.value}}</td>
+                      </tr>
+                    </table>
+                  </div>
               </div>
             </div>
           </div>
@@ -65,31 +80,31 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
 
             </div>
           </div>
-          <div class="row">
-	        	<div class="col-md-3">
-              <ul class="list-group">
-                <li  class="list-group-item" v-for="type in database.rectypes">
-                  <input type="checkbox" v-model="typeFacets" :value="type.name">
-                  {{type.name}} <span class="badge badge-pill badge-secondary">{{type.count}}</span>
-                </li>
-              </ul>
-	        	</div>
-		        <div class="col-md-9">
-              <div v-for="record in filteredRecords" class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{{record.rec_Title}}</h5>
-                  <p>{{record.rec_RecType.name}}</p>
-                  <table class="table">
-                    <thead>Details</thead>
-                    <tr v-for="thing in record.details">
-                      <td>{{thing.fieldName}}</td>
-                      <td>{{thing.value}}</td>
-                    </tr>
-                  </table>
+            <!-- <div class="row">
+              <div class="col-md-3">
+                <ul class="list-group">
+                  <li  class="list-group-item" v-for="type in database.rectypes">
+                    <input type="checkbox" v-model="typeFacets" :value="type.name">
+                    {{type.name}} <span class="badge badge-pill badge-secondary">{{type.count}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-9">
+                <div v-for="record in filteredRecords" class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{record.rec_Title}}</h5>
+                    <p>{{record.rec_RecType.name}}</p>
+                    <table class="table">
+                      <thead>Details</thead>
+                      <tr v-for="thing in record.details">
+                        <td>{{thing.fieldName}}</td>
+                        <td>{{thing.value}}</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
-		        </div>
-		     </div>
+          </div> -->
 	    </div>
             </div>
         </div><!-- .row -->
